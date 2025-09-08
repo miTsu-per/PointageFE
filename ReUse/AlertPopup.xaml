@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MobileApp.ReUse.AlertPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="Popup"
+    IsVisible="False"
+    BackgroundColor="#80000000">
+
+
+	<Grid>
+        <Border StrokeThickness="1"
+                Stroke="#4facfe"
+                BackgroundColor="#1a1a2e"
+                Padding="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="300">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="15">
+                <Label x:Name="TitleLabel"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="White" />
+
+                <Label x:Name="MessageLabel"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="White"
+                       HorizontalTextAlignment="Center" />
+
+                <Button Text="Fermer"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        BorderColor="White"
+                        BorderWidth="1"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        Margin="0,10,0,0"
+                        Clicked="OnCloseClicked" />
+            </VerticalStackLayout>
+
+        </Border>
+	</Grid>
+</ContentView>

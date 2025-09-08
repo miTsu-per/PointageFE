@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:reuse="clr-namespace:MobileApp.ReUse"
+             x:Class="MobileApp.AdminClientPage"
+             Shell.NavBarIsVisible="False">
+
+	<Grid RowDefinitions="Auto,*,Auto">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#6a11cb" Offset="0.0" />
+                <GradientStop Color="#4facfe" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <SearchBar x:Name="SearchEntry" 
+           Grid.Row="0"
+           Placeholder="Rechercher par nom..."
+           TextChanged="OnSearchTextChanged"
+           Margin="20,10,20,20"/>
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="10,1">
+                <CollectionView x:Name="UsersCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeThickness="1"
+									Stroke="#80FFFFFF"
+									BackgroundColor="#40FFFFFF"
+									Padding="15"
+									Margin="10,5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <StackLayout>
+                                    <Label Text="{Binding Nom, StringFormat='Nom: {0}'}" FontAttributes="Bold" TextColor="White" FontSize="18"/>
+                                    <Label Text="{Binding Prenom, StringFormat='Prénom: {0}'}" TextColor="#E0E0E0" FontSize="16"/>
+                                    <Label Text="{Binding Email, StringFormat='Email: {0}'}" FontSize="14" TextColor="#B0B0B0"/>
+                                    <Label Text="{Binding Role, StringFormat='Status: {0}'}" FontSize="14" TextColor="#B0B0B0"/>
+                                    <Button Text="Edit"
+                                            Clicked="OnEditClicked"
+                                            BackgroundColor="#FFD700"
+                                            TextColor="#333333"
+                                            CornerRadius="20"
+                                            HeightRequest="10"
+                                            Margin="0,10,0,0"
+                                            FontAttributes="Bold">
+                                        <Button.Shadow>
+                                            <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                                        </Button.Shadow>
+                                    </Button>
+                                    <Button Text="Delete"
+                                            Clicked="OnDeleteClicked"
+                                            BackgroundColor="#FA8072"
+                                            TextColor="#333333"
+                                            CornerRadius="20"
+                                            HeightRequest="10"
+                                            Margin="0,10,0,0"
+                                            FontAttributes="Bold">
+                                        <Button.Shadow>
+                                            <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                                        </Button.Shadow>
+                                    </Button>
+                                </StackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="2"
+	            Text="Home"
+                Margin="10"
+                HorizontalOptions="Center"
+	            Clicked="OnHomeClicked"
+                BorderColor="White"
+                BorderWidth="2"
+	            TextColor="WHITE"
+	            BackgroundColor="transparent"
+	            FontSize="17"
+	            FontAttributes="Bold"
+	            CornerRadius="25"
+	            HeightRequest="50"
+                WidthRequest="150"
+	            />
+        <reuse:EditAcc x:Name="EditAccPopup" IsVisible="False" Grid.RowSpan="3"/>
+        <reuse:AlertPopup x:Name="MyPopup" IsVisible="False" Grid.RowSpan="3"/>
+    </Grid>
+	
+	
+
+</ContentPage>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:reuse="clr-namespace:MobileApp.ReUse"
+             x:Class="MobileApp.AdminPage"
+             Shell.NavBarIsVisible="False">
+
+        <Grid RowDefinitions="*,Auto">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#6a11cb" Offset="0.0" />
+                <GradientStop Color="#4facfe" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Padding="30">
+            <Label x:Name="HiLabel"
+                   Text="Administration"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalTextAlignment="Center"/>
+
+            <Button Text="➕ Add Account"
+                    Clicked="OnAddAccountClicked"
+                    BackgroundColor="#FFD700" 
+                    TextColor="#333333"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    Margin="0,40,0,0">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Offset="10,10" Radius="20" Opacity="0.3"/>
+                </Button.Shadow>
+            </Button>
+            <Button Text="List Of Client"
+                    Clicked="OnClientListClicked"
+                    BackgroundColor="#ADD8E6" 
+                    TextColor="#333333"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    Margin="0,40,0,0">
+                <Button.Shadow>
+                    <Shadow Brush="Black" Offset="10,10" Radius="20" Opacity="0.3"/>
+                </Button.Shadow>
+            </Button>
+        </StackLayout>
+
+        <Button Text="Logout"
+                Clicked="OnLogoutClicked"
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                Margin="30"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                BorderColor="White"
+                BorderWidth="2"
+                CornerRadius="20"
+                HeightRequest="40"
+                WidthRequest="150"/>
+        <reuse:NewAcc x:Name="NewAccPopup" IsVisible="False" />
+        <reuse:AlertPopup x:Name="MyPopup" IsVisible="False" />
+
+    </Grid>
+</ContentPage>

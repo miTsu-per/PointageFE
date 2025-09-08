@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MobileApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MobileApp"
+    Title="MobileApp"
+
+    Shell.TabBarBackgroundColor="#4A00E0"
+    Shell.TabBarTitleColor="#FFFFFF"
+    Shell.TabBarUnselectedColor="#A9A9A9">
+
+    <ShellContent
+        Title="Accueil"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="Connexion"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
+
+    <TabBar Title="Client">
+        <ShellContent Title="Accueil" ContentTemplate="{DataTemplate local:ClientMainPage}" Route="ClientMainPage" />
+        <ShellContent Title="Historique" ContentTemplate="{DataTemplate local:ClientHistoriquePage}" Route="ClientHistoriquePage" />
+    </TabBar>
+
+    <TabBar Title="Superviseur">
+        <ShellContent Title="Accueil" ContentTemplate="{DataTemplate local:SuperVMainPage}" Route="SuperVMainPage" />
+        <ShellContent Title="Historique" ContentTemplate="{DataTemplate local:SuperVClientPage}" Route="SuperVClientPage" />
+    </TabBar>
+    <ShellContent
+        Title="Admin"
+        ContentTemplate="{DataTemplate local:AdminPage}"
+        Route="AdminPage" />
+    <ShellContent
+        Title="Admin"
+        ContentTemplate="{DataTemplate local:AdminClientPage}"
+        Route="AdminClientPage" />
+    <ShellContent
+        Title="Détail Client"
+        ContentTemplate="{DataTemplate local:SuperVClientDetails}"
+        Route="SuperVClientDetails" />
+    <ShellContent Route="ClientMapPage" ContentTemplate="{DataTemplate local:ClientMapPage}" />
+
+
+</Shell>

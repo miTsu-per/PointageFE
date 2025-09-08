@@ -1,0 +1,113 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MobileApp.ReUse"
+             xmlns:converters="clr-namespace:MobileApp.Converters"
+             x:Class="MobileApp.SuperVMainPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NullOnlyVisibilityConverter2 x:Key="NullOnlyVisibilityConverter2" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, Auto, *, Auto">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#6a11cb" Offset="0.0" />
+                <GradientStop Color="#4facfe" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Label Text="Chronos du Jour"
+               Grid.Row="0"
+               FontSize="36"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               Padding="0,40,0,20"/>
+
+        <SearchBar x:Name="SearchEntry" 
+                   Grid.Row="1"
+                   Placeholder="Rechercher par nom..."
+                   TextChanged="OnSearchTextChanged"
+                   Margin="20,0,20,20"/>
+
+        <ScrollView Grid.Row="2">
+            <StackLayout Padding="10,0">
+                <CollectionView x:Name="TodayTimesView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border StrokeThickness="1"
+                                    Stroke="#80FFFFFF"
+                                    BackgroundColor="#40FFFFFF"
+                                    Padding="15"
+                                    Margin="10,5">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <StackLayout Spacing="10">
+                                    <Label Text="{Binding ClientName}" FontSize="20" FontAttributes="Bold" TextColor="White" />
+                                    <Label Text="{Binding TotalTimeFormatted}" FontSize="16" TextColor="#E0E0E0" />
+
+                                    <StackLayout Padding="10" BackgroundColor="#40FFFFFF" Spacing="5">
+                                        <Label Text="🕒 Shifts :" FontAttributes="Bold" TextColor="White"/>
+                                        <CollectionView ItemsSource="{Binding Shifts}">
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Text="{Binding ShiftLabel}" FontSize="14" TextColor="#E0E0E0"/>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
+                                    </StackLayout>
+
+                                    <Button Text="✅ Approuver tout"
+                                            Clicked="OnApproveClicked"
+                                            CommandParameter="{Binding}"
+                                            IsVisible="{Binding ., Converter={StaticResource NullOnlyVisibilityConverter2}}"
+                                            BackgroundColor="#FFD700"
+                                            TextColor="#333333"
+                                            CornerRadius="20"
+                                            HeightRequest="45"
+                                            FontAttributes="Bold">
+                                        <Button.Shadow>
+                                            <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                                        </Button.Shadow>
+                                    </Button>
+                                    <Button Text="❌ Refuser tout"
+                                            Clicked="OnDisApproveClicked"
+                                            CommandParameter="{Binding}"
+                                            IsVisible="{Binding ., Converter={StaticResource NullOnlyVisibilityConverter2}}"
+                                            BackgroundColor="#FFD700"
+                                            TextColor="#333333"
+                                            CornerRadius="20"
+                                            HeightRequest="45"
+                                            FontAttributes="Bold">
+                                        <Button.Shadow>
+                                            <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                                        </Button.Shadow>
+                                    </Button>
+                                </StackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+        <Button Text="Logout"
+                Grid.Row="3"
+                Clicked="OnLogoutClicked"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="30"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                BorderColor="White"
+                BorderWidth="2"
+                CornerRadius="20"
+                HeightRequest="40"
+                WidthRequest="150"/>
+        <controls:AlertPopup x:Name="MyPopup" Grid.RowSpan="4"/>
+    </Grid>
+</ContentPage>

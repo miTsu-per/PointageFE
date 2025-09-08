@@ -1,0 +1,62 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.SuperVClientPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#6a11cb" Offset="0.0" />
+                <GradientStop Color="#4facfe" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Label Text="Liste des Clients"
+               Grid.Row="0"
+               FontSize="36"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               Padding="0,40,0,20"/>
+
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="10,0">
+			<CollectionView x:Name="ClientsCollectionView" SelectionMode="Single" SelectionChanged="OnClientSelectionChanged">
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+                        <Border StrokeThickness="1"
+                                Stroke="#80FFFFFF"
+                                BackgroundColor="#40FFFFFF"
+                                Padding="15"
+                                Margin="10,5">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20"/>
+                            </Border.StrokeShape>
+
+                            <StackLayout>
+                                <Label Text="{Binding Nom, StringFormat='Nom: {0}'}" FontAttributes="Bold" TextColor="White" FontSize="18"/>
+                                <Label Text="{Binding Prenom, StringFormat='Prénom: {0}'}" TextColor="#E0E0E0" FontSize="16"/>
+                                <Label Text="{Binding Email, StringFormat='Email: {0}'}" FontSize="14" TextColor="#B0B0B0"/>
+                            </StackLayout>
+                        </Border>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+        <Button Text="Logout"
+                Grid.Row="2"
+                Clicked="OnLogoutClicked"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Margin="30"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                BorderColor="White"
+                BorderWidth="2"
+                CornerRadius="20"
+                HeightRequest="40"
+                WidthRequest="150"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,25 @@
+﻿using System;
+using System.Globalization;
+using Microsoft.Maui.Controls;
+using MobileApp.Models;
+
+namespace MobileApp.Converters
+{
+    public class NullOnlyVisibilityConverter2 : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is GroupedClientShifts group)
+            {
+                return group.Shifts.Any(s => s.Approved == null);
+            }
+
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:MobileApp"
+            xmlns:controls="clr-namespace:MobileApp.ReUse"
+            x:Class="MobileApp.ClientTabbedPage"
+            BarBackgroundColor="#4A00E0"
+            BarTextColor="White"
+            SelectedTabColor="#FFFFFF"
+            UnselectedTabColor="#A9A9A9">
+
+    <TabbedPage.Children>
+        <local:ClientMainPage Title="Accueil" />
+        <local:ClientHistoriquePage Title="Historique" />
+    </TabbedPage.Children>
+</TabbedPage>

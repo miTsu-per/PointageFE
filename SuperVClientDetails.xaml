@@ -1,0 +1,123 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MobileApp.ReUse"
+             xmlns:converters="clr-namespace:MobileApp.Converters"
+             x:Class="MobileApp.SuperVClientDetails"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NullOnlyVisibilityConverter x:Key="NullOnlyVisibilityConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *, Auto">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#6a11cb" Offset="0.0" />
+                <GradientStop Color="#4facfe" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Label Text="Détails du Client"
+               Grid.Row="0"
+               FontSize="36"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               Padding="0,40,0,10"/>
+
+        <StackLayout Grid.Row="1" Padding="20,0" Spacing="5">
+            <Label x:Name="NomLabel" FontSize="22" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Label x:Name="EmailLabel" FontSize="16" TextColor="#E0E0E0" HorizontalOptions="Center"/>
+        </StackLayout>
+
+        <DatePicker x:Name="FilterDatePicker"
+                    Grid.Row="2"
+                    DateSelected="OnDateSelected"
+                    Format="D"
+                    Margin="20,10"/>
+
+        <CollectionView x:Name="ShiftsCollectionView" Grid.Row="3" Margin="10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeThickness="1"
+                            Stroke="#80FFFFFF"
+                            BackgroundColor="#40FFFFFF"
+                            Padding="15"
+                            Margin="0,5">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20"/>
+                        </Border.StrokeShape>
+                        <StackLayout Spacing="8">
+                            <Label Text="{Binding Starttime, StringFormat='Début: {0:g}'}" TextColor="White" FontSize="16"/>
+                            <Label Text="{Binding Finishtime, StringFormat='Fin: {0:g}'}" TextColor="White" FontSize="16"/>
+                            <Label Text="{Binding Totaltime, StringFormat='Durée: {0} sec'}" TextColor="#E0E0E0" FontSize="14"/>
+                            <Label Text="{Binding Approved, StringFormat='Approuvé: {0}'}" TextColor="#E0E0E0" FontSize="14" FontAttributes="Italic"/>
+                            <Button Text="✅ Approuver"
+                                    Clicked="OnApproveClicked"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding Approved, Converter={StaticResource NullOnlyVisibilityConverter}}"
+                                    BackgroundColor="#FFD700"
+                                    TextColor="#333333"
+                                    CornerRadius="20"
+                                    HeightRequest="45"
+                                    Margin="0,10,0,0"
+                                    FontAttributes="Bold">
+                                <Button.Shadow>
+                                    <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                                </Button.Shadow>
+                            </Button>
+                            <Button Text="❌ Refuser"
+                                    Clicked="OnDisApproveClicked"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding Approved, Converter={StaticResource NullOnlyVisibilityConverter}}"
+                                    BackgroundColor="#FFD700"
+                                    TextColor="#333333"
+                                    CornerRadius="20"
+                                    HeightRequest="45"
+                                    Margin="0,10,0,0"
+                                    FontAttributes="Bold">
+                                <Button.Shadow>
+                                    <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                                </Button.Shadow>
+                            </Button>
+                        </StackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout Grid.Row="4" Orientation="Vertical" Spacing="10" Padding="20,10">
+            <Button Text="📍 Voir la position"
+                    Clicked="OnViewLocationClicked"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    CornerRadius="20"
+                    HeightRequest="45"
+                    FontAttributes="Bold" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Home"
+                        Clicked="OnHomeClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        BorderColor="White"
+                        BorderWidth="2"
+                        CornerRadius="20"
+                        HeightRequest="40"
+                        WidthRequest="150"/>
+                <Button Text="Logout"
+                        Clicked="OnLogoutClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        BorderColor="White"
+                        BorderWidth="2"
+                        CornerRadius="20"
+                        HeightRequest="40"
+                        WidthRequest="150"/>
+            </StackLayout>
+        </StackLayout>
+        <controls:AlertPopup x:Name="MyPopup" Grid.RowSpan="5"/>
+    </Grid>
+
+</ContentPage>

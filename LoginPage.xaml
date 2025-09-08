@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MobileApp.ReUse"
+             x:Class="MobileApp.LoginPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#6a11cb" Offset="0.0" />
+            <GradientStop Color="#4facfe" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <ScrollView VerticalOptions="Center">
+            <VerticalStackLayout
+                Spacing="20"
+                Padding="30,0">
+
+                <Label
+                    Text="Connexion"
+                    TextColor="White"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center" />
+
+                <Frame BackgroundColor="#40FFFFFF"
+                       CornerRadius="15"
+                       BorderColor="Transparent"
+                       Padding="0">
+                    <Entry x:Name="EmailEntry"
+                           Placeholder="Email..."
+                           PlaceholderColor="#D3D3D3"
+                           TextColor="White"
+                           Keyboard="Email"
+                           Margin="15,0"/>
+                </Frame>
+
+                <Frame BackgroundColor="#40FFFFFF"
+                       CornerRadius="15"
+                       BorderColor="Transparent"
+                       Padding="0">
+                    <Entry x:Name="PasswordEntry"
+                           Placeholder="Mot de passe..."
+                           PlaceholderColor="#D3D3D3"
+                           TextColor="White"
+                           IsPassword="True"
+                           Margin="15,0"/>
+                </Frame>
+
+                <Button Text="Se connecter"
+                        BackgroundColor="#FFD700"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        Clicked="OnLoginClicked">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="10,10"
+                                Radius="20"
+                                Opacity="0.3" />
+                    </Button.Shadow>
+                </Button>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:AlertPopup x:Name="MyPopup" />
+    </Grid>
+</ContentPage>

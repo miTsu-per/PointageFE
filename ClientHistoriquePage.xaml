@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MobileApp.ReUse"
+             x:Class="MobileApp.ClientHistoriquePage"
+             Title="Historique"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#6a11cb" Offset="0.0" />
+            <GradientStop Color="#4facfe" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid RowDefinitions="Auto, Auto, *">
+        <Label Text="Mon Historique"
+               Grid.Row="0"
+               FontSize="25"
+               FontAttributes="Bold"
+               TextColor="White"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Padding="0,20"/>
+
+        <DatePicker x:Name="datePicker"
+                    Grid.Row="1"
+                    DateSelected="OnDateSelected"
+                    Format="D"
+                    Margin="20,10"
+                    TextColor="White" 
+            />
+
+        <CollectionView x:Name="ShiftsCollectionView"
+                        Grid.Row="2"
+                        Margin="15,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="#40FFFFFF"
+                           BorderColor="Transparent"
+                           CornerRadius="15"
+                           Padding="15"
+                           Margin="0,5">
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label TextColor="White" FontSize="16">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Début: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding Starttime, StringFormat='{0:g}'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label TextColor="White" FontSize="16">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Fin: " FontAttributes="Bold"/>
+                                            <Span Text="{Binding Finishtime, StringFormat='{0:g}'}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+
+                            <Label Grid.Row="1" Grid.Column="0" TextColor="White" FontSize="16">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Durée: " FontAttributes="Bold"/>
+                                        <Span Text="{Binding Totaltime, StringFormat='{0} sec'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Border Grid.Column="1" Grid.RowSpan="2"
+                                    Stroke="{Binding Approved, Converter={StaticResource BoolToColorConverter}}"
+                                    StrokeThickness="2"
+                                    BackgroundColor="Transparent"
+                                    Padding="10,5"
+                                    VerticalOptions="Center">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15"/>
+                                </Border.StrokeShape>
+                                <Label Text="{Binding Approved, Converter={StaticResource BoolToStringConverter}}"
+                                       TextColor="{Binding Approved, Converter={StaticResource BoolToColorConverter}}"
+                                       FontAttributes="Bold"/>
+                            </Border>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <controls:AlertPopup x:Name="MyPopup" Grid.RowSpan="3"/>
+    </Grid>
+</ContentPage>

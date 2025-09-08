@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MobileApp.ReUse.NewAcc"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:controls="clr-namespace:MobileApp.ReUse"
+	    
+    x:Name="PopupAcc"
+    IsVisible="False"
+    BackgroundColor="#80000000">
+
+
+    <Grid>
+        <Border StrokeThickness="1"
+                Stroke="#4facfe"
+                BackgroundColor="#1a1a2e"
+                Padding="20"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="320">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+
+            <VerticalStackLayout Spacing="15">
+                <Label Text="Create New Account"
+                       TextColor="White"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+
+                <Entry x:Name="NomEntry" Placeholder="Nom..." TextColor="White" PlaceholderColor="LightGray" BackgroundColor="#2c2c54" HeightRequest="50" />
+                <Entry x:Name="PrenomEntry" Placeholder="Prenom..." TextColor="White" PlaceholderColor="LightGray" BackgroundColor="#2c2c54" HeightRequest="50" />
+                <Entry x:Name="EmailEntry" Placeholder="Email..." Keyboard="Email" TextColor="White" PlaceholderColor="LightGray" BackgroundColor="#2c2c54" HeightRequest="50" />
+                <Entry x:Name="PasswordEntry" Placeholder="Mot de passe..." IsPassword="True" TextColor="White" PlaceholderColor="LightGray" BackgroundColor="#2c2c54" HeightRequest="50" />
+
+                <Picker x:Name="RolePicker" TitleColor="LightGray" BackgroundColor="#2c2c54" TextColor="White" HorizontalOptions="FillAndExpand">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Employe</x:String>
+                            <x:String>Superieur</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Button Text="Create Account"
+                        Clicked="OnCreateClicked"
+                        BackgroundColor="#FFD700"
+                        TextColor="#333333"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        CornerRadius="25"
+                        HeightRequest="50"
+                        Margin="0,20,0,0">
+                    <Button.Shadow>
+                        <Shadow Brush="Black" Offset="5,5" Radius="10" Opacity="0.3"/>
+                    </Button.Shadow>
+                </Button>
+
+                <Button Text="Close"
+                        Clicked="OnCloseClicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        BorderColor="White"
+                        BorderWidth="1"
+                        CornerRadius="25"
+                        HeightRequest="50" />
+            </VerticalStackLayout>
+
+        </Border>
+		<controls:AlertPopup x:Name="MyPopup" />
+    </Grid>
+</ContentView>
